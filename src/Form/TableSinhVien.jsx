@@ -17,8 +17,8 @@ export default class TableSinhVien extends Component {
                                     <i className='fa fa-trash'></i>
                                 </button>
                                 <button onClick={()=>{
-                                    
-                                    handleEditSinhVien(sinhVien)
+                                    let xx= {...sinhVien}
+                                    handleEditSinhVien(xx)
                                 }} className='btn btn-primary mx-2'>
                                     <i className='fa fa-edit'></i>
                                 </button>

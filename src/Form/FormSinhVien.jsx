@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export default class FormSinhVien extends Component {
   render() {
-    const {handleChangeInput,formValue,formError,valid,handleSubmit,handleUpdate}=this.props;
+    const {handleChangeInput,search,formValue,formError,valid,handleSubmit,handleUpdate}=this.props;
     // console.log(formError)
     return (
       <div className="container"  >
@@ -46,8 +46,13 @@ export default class FormSinhVien extends Component {
                 handleUpdate()
             }} type='button' className='btn btn-primary m-2' disabled={!valid}>Update</button>
               </div>
+              
               </div>
             </form>
+            <div className="col-md-6 ">
+              <input className="form-control" data-type="search" name="search" onInput={search}></input>
+                <button className="btn btn-success m-2">Search</button>
+              </div>
           </div>
         </div>
       </div>

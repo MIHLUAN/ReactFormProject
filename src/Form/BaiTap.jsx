@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import FormSinhVien from './FormSinhVien'
 import TableSinhVien from './TableSinhVien'
 
+
 export default class BaiTap extends Component {
     state={
         formValue:{
@@ -26,7 +27,8 @@ export default class BaiTap extends Component {
                 hoTen:'tieu Vy',
                 soDienThoai:'0789213',
                 email:'kk@gmail.com' }
-        ]
+        ],
+         searchTerm:"",
     }
     checkFormValid = () => {
         //return true | false : true khi form hợp lệ, false khi form không hợp lệ
@@ -43,9 +45,10 @@ export default class BaiTap extends Component {
 
         return true;
     }
-
+    
     handleChangeInput = (e) => {
         let { value, name } = e.target;
+       
         let dataType = e.target.getAttribute('data-type');
         let newFormValue = this.state.formValue;
         newFormValue[name] = value;
@@ -105,7 +108,12 @@ export default class BaiTap extends Component {
         arrSinhVien.push(newSinhVien);
         this.setState({
             arrSinhVien: arrSinhVien,
-          
+            formValue:{
+                maSV:'',
+                hoTen:'',
+                soDienThoai:'',
+                email:''
+            }
         })
         // console.log('submit',this.state.formValue);
     }
@@ -131,7 +139,13 @@ export default class BaiTap extends Component {
             }
         }
         this.setState({
-            arrSinhVien: arrSinhVien
+            arrSinhVien: arrSinhVien,
+            formValue:{
+                maSV:'',
+                hoTen:'',
+                soDienThoai:'',
+                email:''
+            }
           
         })
 
@@ -144,12 +158,25 @@ export default class BaiTap extends Component {
             arrSinhVien: arrSinhVien
         })
     }
+    
+    search=(e)=>{
+        let { value, name } = e.target;
+        const xx={...this.state.arrSinhVien}
+        console.log(name, value);
+            console.log(this.state.arrSinhVien)
+            let arrSinhVien = this.state.arrSinhVien.filter(prod => prod.hoTen.match(value) );
+            
+            this.setState({
+                arrSinhVien: arrSinhVien
+            })
+        
+    }
   render() {
    
     return (
       <div className='container'>
       <h3>Bài tập form</h3>
-        <FormSinhVien handleUpdate={this.handleUpdate} handleSubmit={this.handleSubmit} formError={this.state.formError} handleChangeInput={this.handleChangeInput} valid={this.state.valid} formValue={this.state.formValue} />
+        <FormSinhVien search={this.search} handleUpdate={this.handleUpdate} handleSubmit={this.handleSubmit} formError={this.state.formError} handleChangeInput={this.handleChangeInput} valid={this.state.valid} formValue={this.state.formValue} />
         <TableSinhVien handleDel={this.handleDel} arrSinhVien={this.state.arrSinhVien} handleEditSinhVien={this.handleEditSinhVien}/>
       </div>
     )
